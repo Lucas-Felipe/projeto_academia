@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  #API
+  academia-api:
+    container_name: academia-api
+    build: ./
+    command: python server.py
+    working_dir: /usr/src/projeto_academia
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/projeto_academia
+
+  #Banco de Dados
+  mariadb:
+    build: ./mariadb
+    ports:
+      - "3305:3306"
+    environment:
+      DB_PASSWORD: acad123
+      MARIADB_ROOT_PASSWORD: acad123

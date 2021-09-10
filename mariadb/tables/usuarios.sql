@@ -1,0 +1,3 @@
+-- Codigo exemplo
+BEGIN TRANSACTION;
+CREATE TABLE usuarios (cpf INT PRIMARY KEY) COMMIT;
