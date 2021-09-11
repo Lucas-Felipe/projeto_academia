@@ -12,4 +12,4 @@ RUN rm -f requirements.txt
 
 EXPOSE 8080
 
-CMD ["python3", "-u", "-m", "flask", "run", "--host=0.0.0.0"]
+CMD ["python3", "-u", "-m", "flask", "run", "--host=0.0.0.0", "bin/bash"]
