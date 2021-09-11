@@ -5,12 +5,18 @@ services:
   academia-api:
     container_name: academia-api
     build: ./
-    command: python server.py
+    command: flask run --host=0.0.0.0
     working_dir: /usr/src/projeto_academia
     ports:
-      - "3000:3000"
+      - "5000:5000"
+    expose:
+      - 8080
     volumes:
       - ./:/usr/src/projeto_academia
+    environment:
+      FLASK_APP: server.py
+    links:
+      - mariadb
 
   #Banco de Dados
   mariadb:
