@@ -15,6 +15,10 @@ services:
       - ./:/usr/src/projeto_academia
     environment:
       FLASK_APP: server.py
+      FLASK_ENV: development
+      MARIADB_TESTE: mariadb://acadadmin:acad123@mariadb:3306/academia
+      MARIADB_PASSWORD: acad123
+      MARIADB_URI: jdbc:mysql://acadadmin:acad123@[mariadb:3306]/db
     links:
       - mariadb
 
