@@ -29,4 +29,3 @@ services:
       MARIADB_USER: acadadmin
       MARIADB_PASSWORD: acad123
       MARIADB_ROOT_PASSWORD: acad123
-  
