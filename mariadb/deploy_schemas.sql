@@ -9,3 +9,4 @@
 \. /docker-entrypoint-initdb.d/tables/treinos.sql
 \. /docker-entrypoint-initdb.d/tables/exercicios.sql
 \. /docker-entrypoint-initdb.d/tables/contem.sql
+\. /docker-entrypoint-initdb.d/inserts/inserts.sql

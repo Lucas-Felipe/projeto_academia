@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS FREQUENCIAS(
     hora_entrada TIME NOT NULL,
     hora_saida TIME NOT NULL,
     data_ DATE NOT NULL,
-    u_cpf INT,
+    u_cpf VARCHAR(11),
     FOREIGN KEY (u_cpf) REFERENCES USUARIOS(cpf),
     PRIMARY KEY(data_, u_cpf)
 );

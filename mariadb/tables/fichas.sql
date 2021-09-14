@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS FICHAS(
     n_repeticoes TINYINT,
     n_series TINYINT NOT NULL,
     peso FLOAT NOT NULL,
-    a_cpf INT,
+    a_cpf VARCHAR(11),
     FOREIGN KEY (a_cpf) REFERENCES ALUNOS(cpf_aluno),
     PRIMARY KEY(id_ficha, a_cpf)
 );
