@@ -29,7 +29,4 @@ services:
       MARIADB_USER: acadadmin
       MARIADB_PASSWORD: acad123
       MARIADB_ROOT_PASSWORD: acad123
-    logging:
-      driver: syslog
-      options:
-        tag: "{{.DaemonName}}(image={{.ImageName}};name={{.Name}};id={{.ID}})"
+  
