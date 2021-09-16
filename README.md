@@ -17,6 +17,8 @@ A url de acesso à API será mostrada no terminal assim que os conteiners estive
 
 Como utilizar as rotas REST:
 
+As rotas podem ser acessadas através da url: `http://localhost:5000`
+
 ### /add_usuario
 
 Método: POST  
