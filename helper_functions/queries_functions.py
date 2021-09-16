@@ -1,4 +1,5 @@
 from flask import Flask, request, json
+from datetime import datetime
 import mysql.connector
 from mysql.connector import Error
 from mysql.connector import errorcode
@@ -14,6 +15,8 @@ def run_insert_query(query, values, table_name):
     connection = get_database_connection()
     res = ''
     id = None
+    print("LOG!!!!!!!!!!!!!!!")
+    print(type(values))
     try:
         cursor = connection.cursor()
         cursor.execute(query, values)
@@ -36,15 +39,21 @@ def run_insert_query(query, values, table_name):
     return (res, id)
 
 
-def run_select_query(query):
+# Pode receber uma query de consulta simples e também múltiplos argumentos para consultas com variaveis
+def run_select_query(query, *argv):
     connection = get_database_connection()
+    values = ''
+    if (len(argv) > 0):
+        values = argv[0]
+    print("LOG VALUE: ", values)
     try:
+        print("LOG VALUE: ", values)
         cursor = connection.cursor()
-        cursor.execute(query)
+        cursor.execute(query, values)
         res = cursor.fetchall()
-        for x in res:
-            print(x)
-        print(res)
+        # for x in res:
+        #    print(x)
+        # print(res)
         cursor.close()
     except mysql.connector.Error as error:
         res = "Failed to select from table {}".format(error)
@@ -52,7 +61,7 @@ def run_select_query(query):
     finally:
         if connection.is_connected():
             connection.close()
-    return json.dumps(res, ensure_ascii=False)
+    return json.dumps(res, ensure_ascii=False, default=str)
 
 
 def get_database_connection():
