@@ -5,6 +5,7 @@ from mysql.connector import errorcode
 from os import environ
 
 from helper_functions.queries_functions import run_insert_query
+from helper_functions.queries import insert_usuario, insert_aluno, insert_instrutor, insert_frequencia
 
 app = Flask(__name__)
 
@@ -14,10 +15,11 @@ def home():
     return "Hello world"
 
 
-@app.route('/add_usuário', methods=['POST'])
+@app.route('/add_usuario', methods=['POST'])
 def add_usuario():
     request_data = request.get_json()
-    insert_query = """INSERT INTO USUARIOS (cpf, nome, dt_inicio, email, senha, adm) VALUES (%s, %s, %s, %s, %s, %s)"""
+    print(request_data)
+    insert_query = insert_usuario
     val = (request_data['cpf'], request_data['nome'], request_data['dt_inicio'],
            request_data['email'], request_data['senha'], request_data['adm'])
     res = []
@@ -28,10 +30,10 @@ def add_usuario():
 @app.route('/add_aluno', methods=['POST'])
 def add_aluno():
     request_data = request.get_json()
-    insert_query_usuario = """INSERT INTO USUARIOS (cpf, nome, dt_inicio, email, senha, adm) VALUES (%s, %s, %s, %s, %s, %s)"""
+    insert_query_usuario = insert_usuario
     val_usuario = (request_data['cpf'], request_data['nome'], request_data['dt_inicio'],
                    request_data['email'], request_data['senha'], request_data['adm'])
-    insert_query_aluno = """INSERT INTO ALUNOS (altura, peso, n_cartao, link_call, objetivo, cpf_aluno, cpf_instrutor) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+    insert_query_aluno = insert_aluno
     val_aluno = (request_data['altura'], request_data['peso'], request_data['n_cartao'],
                  request_data['link_call'], request_data['objetivo'], request_data['cpf'], request_data['cpf_instrutor'])
     res = []
@@ -46,7 +48,7 @@ def add_instrutor():
     insert_query_usuario = """INSERT INTO USUARIOS (cpf, nome, dt_inicio, email, senha, adm) VALUES (%s, %s, %s, %s, %s, %s)"""
     val_usuario = (request_data['cpf'], request_data['nome'], request_data['dt_inicio'],
                    request_data['email'], request_data['senha'], request_data['adm'])
-    insert_query_instrutor = """INSERT INTO INSTRUTORES (salario, especializacao, conta, cpf_instrutor) VALUES (%s, %s, %s, %s)"""
+    insert_query_instrutor = insert_instrutor
     val_instrutor = (request_data['salario'], request_data['especializacao'],
                      request_data['conta'], request_data['cpf'])
     res = []
@@ -59,7 +61,7 @@ def add_instrutor():
 @app.route('/add_frequencia', methods=['POST'])
 def add_frequencia():
     request_data = request.get_json()
-    insert_query = """INSERT INTO FREQUENCIAS (hora_entrada, hora_saida, data, u_cpf) VALUES (%s, %s, %s, %s)"""
+    insert_query = insert_frequencia
     val = (request_data['hora_entrada'], request_data['hora_saida'],
            request_data['Data'], request_data['u_cpf'])
     res = []

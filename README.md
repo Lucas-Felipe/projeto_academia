@@ -17,7 +17,7 @@ A url de acesso à API será mostrada no terminal assim que os conteiners estive
 
 Como utilizar as rotas REST:
 
-### /add_usuário
+### /add_usuario
 
 Método: POST  
 json:
