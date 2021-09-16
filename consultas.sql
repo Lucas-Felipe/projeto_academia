@@ -53,3 +53,25 @@ LEFT JOIN academia.USUARIOS as U2 on U2.cpf =I.cpf_instrutor
 LEFT JOIN academia.TREINOS as T on T.id_ficha =F.id_ficha 
 LEFT JOIN academia.CONTEM as C on C.id_ficha =F.id_ficha 
 LEFT JOIN academia.EXERCICIOS as E on E.id_exercicio=C.id_exercicio 
+
+
+-- usando funções de agrgação para salário do professor
+SELECT SUM(salario), MAX(salario), MIN(salario), AVG(salario), COUNT(*)
+    FROM INSTRUTORES;
+
+
+-- recuperar o nome de instutores que possuem trÊs ou mais alunos - uso de subconsulta 
+SELECT U.nome
+FROM USUARIOS AS U, INSTRUTORES AS I 
+WHERE U.cpf = cpf_instrutor AND 
+                                (SELECT COUNT(*)
+                                 FROM ALUNOS AS A
+                                 WHERE A.cpf_instrutor = I.cpf_instrutor) >=3; 
+
+
+-- pendentes de pagar o mes, para os que pagou é só trocar por "Exists"
+SELECT U.nome, U.cpf 
+FROM USUARIOS AS U, ALUNOS AS A 
+WHERE U.cpf = A.cpf_aluno AND NOT EXISTS (SELECT *
+                                      FROM PAGAMENTOS
+                                      WHERE U.cpf = cpf_cliente AND dt_pagamento LIKE  '2021-08-__');
