@@ -1,3 +1,4 @@
+from flask import Flask, request, json
 import mysql.connector
 from mysql.connector import Error
 from mysql.connector import errorcode
@@ -33,6 +34,25 @@ def run_insert_query(query, values, table_name):
         if connection.is_connected():
             connection.close()
     return (res, id)
+
+
+def run_select_query(query):
+    connection = get_database_connection()
+    try:
+        cursor = connection.cursor()
+        cursor.execute(query)
+        res = cursor.fetchall()
+        for x in res:
+            print(x)
+        print(res)
+        cursor.close()
+    except mysql.connector.Error as error:
+        res = "Failed to select from table {}".format(error)
+        print(res)
+    finally:
+        if connection.is_connected():
+            connection.close()
+    return json.dumps(res, ensure_ascii=False)
 
 
 def get_database_connection():

@@ -4,10 +4,11 @@ from mysql.connector import Error
 from mysql.connector import errorcode
 from os import environ
 
-from helper_functions.queries_functions import run_insert_query
-from helper_functions.queries import insert_usuario, insert_aluno, insert_instrutor, insert_frequencia
+from helper_functions.queries_functions import run_insert_query, run_select_query
+from helper_functions.queries import insert_usuario, insert_aluno, insert_instrutor, insert_frequencia, select_alunos_com_instrutor
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 
 
 @app.route('/')
@@ -18,7 +19,6 @@ def home():
 @app.route('/add_usuario', methods=['POST'])
 def add_usuario():
     request_data = request.get_json()
-    print(request_data)
     insert_query = insert_usuario
     val = (request_data['cpf'], request_data['nome'], request_data['dt_inicio'],
            request_data['email'], request_data['senha'], request_data['adm'])
@@ -67,6 +67,12 @@ def add_frequencia():
     res = []
     res.append(run_insert_query(insert_query, val, "FREQUENCIAS"))
     return json.dumps(res)
+
+
+@app.route('/lista_alunos_com_instrutor', methods=['GET'])
+def lista_alunos_com_instrutor():
+    select_query = select_alunos_com_instrutor
+    return run_select_query(select_query)
 
 
 if __name__ == "__main__":
