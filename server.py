@@ -5,7 +5,7 @@ from mysql.connector import errorcode
 from os import environ
 
 from helper_functions.queries_functions import run_insert_query, run_select_query
-from helper_functions.queries import insert_usuario, insert_aluno, insert_instrutor, insert_frequencia, select_alunos_com_instrutor, select_instrutores_e_cont_alunos, select_todas_frequencias, select_todos_usuarios, select_fichas_de_aluno, select_ficha_dia_semana, select_fichas_periodo, select_salarios, select_instrutores_n_alunos, select_inadimplentes_mes, select_todos_instrutores, select_todos_exerciicos, insert_novo_exercicio
+from helper_functions.queries import insert_usuario, insert_aluno, insert_instrutor, insert_frequencia, select_alunos_com_instrutor, select_instrutores_e_cont_alunos, select_todas_frequencias, select_todos_usuarios, select_fichas_de_aluno, select_ficha_dia_semana, select_fichas_periodo, select_salarios, select_instrutores_n_alunos, select_inadimplentes_mes, select_todos_instrutores, select_todos_exerciicos, insert_novo_exercicio, select_exercicio_musculo, insert_nova_ficha, insert_treino, insert_contem
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -63,6 +63,13 @@ def todos_exercicios():
     return run_select_query(select_todos_exerciicos)
 
 
+@app.route('/exercicio_musculo', methods=['GET'])
+def exercicio_musculo():
+    request_data = request.get_json()
+    val = (request_data['musculo'].upper(),)
+    return run_select_query(select_exercicio_musculo, val)
+
+
 @app.route('/add_exercicio', methods=['POST'])
 def add_exercicio():
     request_data = request.get_json()
@@ -79,6 +86,24 @@ def add_frequencia():
     res = []
     res.append(run_insert_query(insert_query, val, "FREQUENCIAS"))
     return json.dumps(res)
+
+
+@app.route('/add_treino', methods=['POST'])
+def add_treino():
+    request_data = request.get_json()
+    dia_semana = request_data['dia_semana']
+    cpf_aluno = request_data['cpf_aluno']
+    cpf_instrutor = request_data['cpf_instrutor']
+    exercicios = request_data['exercicios']
+    print(dia_semana, cpf_aluno, cpf_instrutor, exercicios)
+    for entry in exercicios:
+        run_insert_query(
+            insert_nova_ficha, (entry['n_repeticoes'], entry['n_series'], entry['peso'], cpf_aluno), "FICHAS")
+        run_insert_query(insert_treino, (dia_semana,
+                         cpf_aluno, cpf_instrutor), "TREINOS")
+        run_insert_query(insert_contem, (entry['id_exercicio'],), "CONTEM")
+        print(entry['id_exercicio'])
+    return "fimm"
 
 
 @app.route('/lista_alunos_com_instrutor', methods=['GET'])
@@ -108,7 +133,6 @@ def mostrar_todos_usuarios():
     return run_select_query(select_todos_usuarios)
 
 
-# esse metodo usa json pra retornar
 @app.route("/fichas_de_aluno", methods=['GET'])
 def fichas_de_aluno():
     request_data = request.get_json()
@@ -149,18 +173,6 @@ def inadimplentes_mes():
     values = (request_data['mes'],)
     print(values)
     return run_select_query(select_inadimplentes_mes, values)
-
-
-@app.route("/teste", methods=['GET'])
-def test_param():
-    param = request.args.get('aa')
-    # url do get tem que ser : http://.../teste?aa=PARAMETROAQUI   para solicitacao via url
-
-    request_data = request.get_json()
-    test_json = request_data['bb']
-    # solicitacao com body em json tem que ser {"bb" : "valor" }
-
-    return test_json
 
 
 if __name__ == "__main__":

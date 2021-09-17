@@ -79,7 +79,20 @@ As rotas podem ser acessadas através da url: `http://localhost:5000`
 
 ### /todos_exercicios
 
-> Mostra uma lista com todos os exercícios cadastrados
+> Mostra uma lista com todos os exercícios cadastrados  
+> Método: GET
+
+## /exercicio_musculo
+
+> Mostra uma lista de todos os exercícios que ativam o músculo pesquisado  
+> Método: GET  
+> json body
+
+```json
+{
+  "musculo": "nome do músculo"
+}
+```
 
 ### /add_exercicio
 
@@ -91,6 +104,24 @@ As rotas podem ser acessadas através da url: `http://localhost:5000`
 {
   "nome": "nome do exercicio",
   "musculo": "musculo ativado"
+}
+```
+
+### /add_treino
+
+> Adiciona um novo treino para um aluno em um dia específico da semana  
+> Método: POST  
+> json body:
+
+```json
+{
+  "dia_semana": "2021-09-15",
+  "cpf_aluno": "25864831550",
+  "cpf_instrutor": "10200612548",
+  "exercicios": [
+    { "id_exercicio": 1, "n_repeticoes": 44, "n_series": 22, "peso": 15 },
+    { "id_exercicio": 2, "n_repeticoes": 33, "n_series": 11, "peso": 20 }
+  ]
 }
 ```
 

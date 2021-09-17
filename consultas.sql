@@ -16,6 +16,11 @@ SELECT U.nome, I.especializacao, U.dt_inicio, U.email
 SELECT *
     FROM academia.EXERCICIOS;
 
+-- Buscar exercício por músculo
+SELECT id_exercicio , nome, musculo 
+FROM EXERCICIOS
+WHERE UPPER(musculo) = 'OMBRO';
+
 -- Iserir novo exercicio
 INSERT INTO EXERCICIOS (nome, musculo)
 VALUES ('nome do exercicio', 'músculo ativado');
@@ -37,6 +42,11 @@ SELECT U.nome, F.n_repeticoes, F.n_series, F.peso, T.dia_semana, E.nome, E.muscu
 FROM USUARIOS AS U, ALUNOS AS A, INSTRUTORES AS I, TREINOS AS T, FICHAS AS F, EXERCICIOS AS E, CONTEM  AS C
 WHERE U.cpf='00789665603' AND T.dia_semana>='2021-05-08' AND T.dia_semana <='2021-07-04' AND A.cpf_instrutor=I.cpf_instrutor AND A.cpf_aluno=T.u_cpf AND
 T.id_ficha=F.id_ficha AND F.id_ficha=C.id_ficha AND C.id_exercicio=E.id_exercicio;
+
+-- Criar novo treino para aluno
+INSERT INTO FICHAS (n_repeticoes, n_series, peso, a_cpf) VALUES (55,55, 10, '12598654712');
+INSERT INTO TREINOS (dia_semana, id_ficha, u_cpf, i_cpf) VALUES ('2021/09/17', (SELECT id_ficha FROM academia.FICHAS ORDER BY id_ficha DESC LIMIT 1), '12598654712', '10200612548');
+INSERT INTO CONTEM (id_exercicio, id_ficha) VALUES (1, (SELECT id_ficha FROM academia.FICHAS ORDER BY id_ficha DESC LIMIT 1));
 
 /*consulta de alunos e seus instrutores*/
 SELECT  U2.nome as nome_aluno, A.cpf_aluno,A.altura ,A.peso ,A.objetivo, I.cpf_instrutor ,

@@ -10,9 +10,20 @@ insert_frequencia = """INSERT INTO FREQUENCIAS (hora_entrada, hora_saida, data, 
 # Lista todos os exercícios
 select_todos_exerciicos = "SELECT E.nome, E.musculo FROM academia.EXERCICIOS AS E;"
 
-# Insere novo exercícios
+# Buscar exercicio por músculo
+select_exercicio_musculo = """SELECT id_exercicio , nome, musculo 
+FROM EXERCICIOS
+WHERE UPPER(musculo) = %s;"""
+
+# Insere novo exercício
 insert_novo_exercicio = """INSERT INTO EXERCICIOS (nome, musculo)
 VALUES (%s, %s);"""
+
+# inserir novo treino
+insert_nova_ficha = "INSERT INTO FICHAS (n_repeticoes, n_series, peso, a_cpf) VALUES (%s, %s, %s, %s);"
+insert_treino = "INSERT INTO TREINOS (dia_semana, id_ficha, u_cpf, i_cpf) VALUES (%s, (select id_ficha from academia.FICHAS ORDER BY id_ficha DESC LIMIT 1), %s, %s);"
+insert_contem = "INSERT INTO CONTEM (id_exercicio, id_ficha) VALUES (%s, (select id_ficha from academia.FICHAS ORDER BY id_ficha DESC LIMIT 1));"
+
 
 # Query para listar os alunos e seus respectivos instrutores
 select_alunos_com_instrutor = """SELECT  U2.nome as nome_aluno, A.cpf_aluno,A.altura ,A.peso ,A.objetivo, I.cpf_instrutor,

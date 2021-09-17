@@ -1,6 +1,6 @@
 START TRANSACTION;
 CREATE TABLE IF NOT EXISTS FICHAS(
-    id_ficha INT,
+    id_ficha INT AUTO_INCREMENT,
     n_repeticoes TINYINT,
     n_series TINYINT NOT NULL,
     peso FLOAT NOT NULL,
