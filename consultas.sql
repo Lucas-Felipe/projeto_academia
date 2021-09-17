@@ -108,3 +108,21 @@ FROM USUARIOS AS U, ALUNOS AS A
 WHERE U.cpf = A.cpf_aluno AND NOT EXISTS (SELECT *
                                       FROM PAGAMENTOS
                                       WHERE U.cpf = cpf_cliente AND dt_pagamento LIKE  '2021-08-__');
+
+-- atualizar um instutor de um aluno 
+UPDATE ALUNOS 
+set cpf_instrutor = '01200478631'
+WHERE cpf_aluno = '01047856610';
+
+-- reverter atualização de cima 
+UPDATE ALUNOS 
+set cpf_instrutor = '05214874563'
+WHERE cpf_aluno = '01047856610';
+
+-- delete uma frequencia 
+DELETE FREQUENCIAS 
+WHERE u_cpf = '01524856930' AND data_ = '2019-12-03';
+
+--reverter o delete 
+INSERT INTO FREQUENCIAS (hora_entrada, hora_saida, data_, u_cpf) 
+VALUES ('09:55', '12:01', '2019/12/03', '01524856930');
