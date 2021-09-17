@@ -212,5 +212,17 @@ As rotas podem ser acessadas através da url: `http://localhost:5000`
 
 ### /salarios
 
-> Retorna uma tabela informando a soma dos salários, maior salário, menos salário, média salarial e número de instrutores cadastrados.  
+> Retorna uma tabela informando a soma dos salários, maior salário, menor salário, média salarial e número de instrutores cadastrados.  
 > Método: GET
+
+### /inadimplentes_mes
+
+> Retorna os alunos que estão inadimplentes no mês indicado  
+> Método: GET  
+> body json:
+
+```json
+{
+  "mes": "2021-09-__"
+}
+```
