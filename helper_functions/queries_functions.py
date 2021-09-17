@@ -15,8 +15,8 @@ def run_insert_query(query, values, table_name):
     connection = get_database_connection()
     res = ''
     id = None
-    print("LOG!!!!!!!!!!!!!!!")
-    print(type(values))
+    # print("LOG!!!!!!!!!!!!!!!")
+    # print(type(values))
     try:
         cursor = connection.cursor()
         cursor.execute(query, values)

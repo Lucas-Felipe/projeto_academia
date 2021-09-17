@@ -77,7 +77,7 @@ LEFT JOIN academia.USUARIOS as U on U.cpf =F.u_cpf
 GROUP BY F.u_cpf;
 
 /*Sugestão para consulta de fichas*/
-SELECT U.nome as nome_aluno,U2.nome as nome_instrutor,F.id_ficha as num_ficha,F.n_repeticoes ,F.n_series ,
+/* SELECT U.nome as nome_aluno,U2.nome as nome_instrutor,F.id_ficha as num_ficha,F.n_repeticoes ,F.n_series ,
     F.peso ,T.dia_semana,E.nome as nome_exercicio FROM academia.FICHAS as F
 left join academia.USUARIOS as U on U.cpf =F.a_cpf 
 LEFT JOIN academia.ALUNOS as A on A.cpf_aluno =U.cpf 
@@ -85,7 +85,7 @@ LEFT JOIN academia.INSTRUTORES as I on I.cpf_instrutor =A.cpf_instrutor
 LEFT JOIN academia.USUARIOS as U2 on U2.cpf =I.cpf_instrutor 
 LEFT JOIN academia.TREINOS as T on T.id_ficha =F.id_ficha 
 LEFT JOIN academia.CONTEM as C on C.id_ficha =F.id_ficha 
-LEFT JOIN academia.EXERCICIOS as E on E.id_exercicio=C.id_exercicio;
+LEFT JOIN academia.EXERCICIOS as E on E.id_exercicio=C.id_exercicio; */
 
 
 -- usando funções de agrgação para salário do professor
