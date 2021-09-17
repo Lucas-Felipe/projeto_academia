@@ -15,8 +15,6 @@ def run_insert_query(query, values, table_name):
     connection = get_database_connection()
     res = ''
     id = None
-    # print("LOG!!!!!!!!!!!!!!!")
-    # print(type(values))
     try:
         cursor = connection.cursor()
         cursor.execute(query, values)
@@ -39,7 +37,34 @@ def run_insert_query(query, values, table_name):
     return (res, id)
 
 
+def run_update_query(query, values, table_name):
+    connection = get_database_connection()
+    res = ''
+    id = None
+    try:
+        cursor = connection.cursor()
+        cursor.execute(query, values)
+        connection.commit()
+        id = cursor.lastrowid
+        if id is not None:
+            res += 'Record with id('+str(id) + \
+                ') updated successfully '+table_name+' table'
+        else:
+            res += str(cursor.rowcount) + \
+                ' Record updated successfully into '+table_name+' table'
+        print(res)
+        cursor.close()
+    except mysql.connector.Error as error:
+        res += "Failed to update record into table {}".format(error)
+        print(res)
+    finally:
+        if connection.is_connected():
+            connection.close()
+    return (res, id)
+
 # Pode receber uma query de consulta simples e também múltiplos argumentos para consultas com variaveis
+
+
 def run_select_query(query, *argv):
     connection = get_database_connection()
     values = ''

@@ -4,8 +4,8 @@ from mysql.connector import Error
 from mysql.connector import errorcode
 from os import environ
 
-from helper_functions.queries_functions import run_insert_query, run_select_query
-from helper_functions.queries import insert_usuario, insert_aluno, insert_instrutor, insert_frequencia, select_alunos_com_instrutor, select_instrutores_e_cont_alunos, select_todas_frequencias, select_todos_usuarios, select_fichas_de_aluno, select_ficha_dia_semana, select_fichas_periodo, select_salarios, select_instrutores_n_alunos, select_inadimplentes_mes, select_todos_instrutores, select_todos_exerciicos, insert_novo_exercicio, select_exercicio_musculo, insert_nova_ficha, insert_treino, insert_contem
+from helper_functions.queries_functions import run_insert_query, run_select_query, run_update_query
+from helper_functions.queries import insert_usuario, insert_aluno, insert_instrutor, insert_frequencia, select_alunos_com_instrutor, select_instrutores_e_cont_alunos, select_todas_frequencias, select_todos_usuarios, select_fichas_de_aluno, select_ficha_dia_semana, select_fichas_periodo, select_salarios, select_instrutores_n_alunos, select_inadimplentes_mes, select_todos_instrutores, select_todos_exerciicos, insert_novo_exercicio, select_exercicio_musculo, insert_nova_ficha, insert_treino, insert_contem, update_instrutor
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -55,6 +55,16 @@ def add_instrutor():
     res.append(run_insert_query(insert_query_usuario, val_usuario, 'USUARIOS'))
     res.append(run_insert_query(
         insert_query_instrutor, val_instrutor, "INSTRUTORES"))
+    return json.dumps(res)
+
+
+@app.route("/atualizar_instrutor", methods=['PUT'])
+def atualizar_instrutor():
+    request_data = request.get_json()
+    update_query = update_instrutor
+    val = (request_data['cpf_instrutor'], request_data['cpf_aluno'])
+    res = []
+    res.append(run_update_query(update_query, val, "ALUNOS"))
     return json.dumps(res)
 
 

@@ -77,6 +77,19 @@ As rotas podem ser acessadas através da url: `http://localhost:5000`
 }
 ```
 
+### /atualizar_instrutor
+
+> Atualiza o instrutor do aluno especificado para um novo instrutor informado  
+> Método: PUT  
+> body json:
+
+```json
+{
+  "cpf_instrutor": "0100478631",
+  "cpf_aluno": "01047856610"
+}
+```
+
 ### /todos_exercicios
 
 > Mostra uma lista com todos os exercícios cadastrados  

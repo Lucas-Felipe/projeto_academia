@@ -7,6 +7,11 @@ insert_instrutor = """INSERT INTO INSTRUTORES (salario, especializacao, conta, c
 # Query para inserir frequencia
 insert_frequencia = """INSERT INTO FREQUENCIAS (hora_entrada, hora_saida, data, u_cpf) VALUES (%s, %s, %s, %s)"""
 
+# Atualiza instrutor de determinado aluno
+update_instrutor = """UPDATE ALUNOS 
+set cpf_instrutor = %s
+WHERE cpf_aluno = %s;"""
+
 # Lista todos os exercícios
 select_todos_exerciicos = "SELECT E.nome, E.musculo FROM academia.EXERCICIOS AS E;"
 
