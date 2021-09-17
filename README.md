@@ -77,6 +77,23 @@ As rotas podem ser acessadas através da url: `http://localhost:5000`
 }
 ```
 
+### /todos_exercicios
+
+> Mostra uma lista com todos os exercícios cadastrados
+
+### /add_exercicio
+
+> Adiciona um exercício ao banco de dados  
+> Método: POST  
+> json body:
+
+```json
+{
+  "nome": "nome do exercicio",
+  "musculo": "musculo ativado"
+}
+```
+
 ### /add_frequencia
 
 > adiciona um registro de frequência ao banco de dados  

@@ -6,10 +6,19 @@ SELECT *
 SELECT U.nome, A.altura, A.peso, A.objetivo, A.link_call, U.email
     FROM ALUNOS AS A, USUARIOS AS U
     WHERE cpf = cpf_aluno;
-    
-SELECT *
-    FROM INSTRUTORES, USUARIOS
+
+-- Lista todos os instrutores    
+SELECT U.nome, I.especializacao, U.dt_inicio, U.email 
+    FROM INSTRUTORES AS I, USUARIOS AS U
     WHERE cpf = cpf_instrutor; 
+
+-- Lista todos os exercicios
+SELECT *
+    FROM academia.EXERCICIOS;
+
+-- Iserir novo exercicio
+INSERT INTO EXERCICIOS (nome, musculo)
+VALUES ('nome do exercicio', 'músculo ativado');
 
 -- selecionar ficha de treino por usuario 
 SELECT U.nome, F.n_repeticoes, F.n_series, F.peso, T.dia_semana, E.nome, E.musculo

@@ -5,7 +5,7 @@ from mysql.connector import errorcode
 from os import environ
 
 from helper_functions.queries_functions import run_insert_query, run_select_query
-from helper_functions.queries import insert_usuario, insert_aluno, insert_instrutor, insert_frequencia, select_alunos_com_instrutor, select_instrutores_e_cont_alunos, select_todas_frequencias, select_todos_usuarios, select_fichas_de_aluno, select_ficha_dia_semana, select_fichas_periodo, select_salarios, select_instrutores_n_alunos
+from helper_functions.queries import insert_usuario, insert_aluno, insert_instrutor, insert_frequencia, select_alunos_com_instrutor, select_instrutores_e_cont_alunos, select_todas_frequencias, select_todos_usuarios, select_fichas_de_aluno, select_ficha_dia_semana, select_fichas_periodo, select_salarios, select_instrutores_n_alunos, select_inadimplentes_mes, select_todos_instrutores, select_todos_exerciicos, insert_novo_exercicio
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -58,6 +58,18 @@ def add_instrutor():
     return json.dumps(res)
 
 
+@app.route('/todos_exercicios', methods=['GET'])
+def todos_exercicios():
+    return run_select_query(select_todos_exerciicos)
+
+
+@app.route('/add_exercicio', methods=['POST'])
+def add_exercicio():
+    request_data = request.get_json()
+    val = (request_data['nome'], request_data['musculo'])
+    return run_insert_query(insert_novo_exercicio, val, "EXERCICIOS")
+
+
 @app.route('/add_frequencia', methods=['POST'])
 def add_frequencia():
     request_data = request.get_json()
@@ -73,6 +85,11 @@ def add_frequencia():
 def lista_alunos_com_instrutor():
     select_query = select_alunos_com_instrutor
     return run_select_query(select_query)
+
+
+@app.route('/todos_instrutores', methods=['GET'])
+def todos_instrutores():
+    return run_select_query(select_todos_instrutores)
 
 
 @app.route('/instrutores_e_cont_alunos', methods=['GET'])
@@ -124,6 +141,14 @@ def instrutores_n_alunos():
     request_data = request.get_json()
     values = tuple(str(request_data['n_alunos']))
     return run_select_query(select_instrutores_n_alunos, values)
+
+
+@app.route("/inadimplentes_mes", methods=['GET'])
+def inadimplentes_mes():
+    request_data = request.get_json()
+    values = (request_data['mes'],)
+    print(values)
+    return run_select_query(select_inadimplentes_mes, values)
 
 
 @app.route("/teste", methods=['GET'])

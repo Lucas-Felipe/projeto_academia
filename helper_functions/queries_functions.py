@@ -44,8 +44,8 @@ def run_select_query(query, *argv):
     connection = get_database_connection()
     values = ''
     if (len(argv) > 0):
+        print(len(argv))
         values = argv[0]
-    print("LOG VALUE: ", values)
     try:
         print("LOG VALUE: ", values)
         cursor = connection.cursor()

@@ -7,6 +7,13 @@ insert_instrutor = """INSERT INTO INSTRUTORES (salario, especializacao, conta, c
 # Query para inserir frequencia
 insert_frequencia = """INSERT INTO FREQUENCIAS (hora_entrada, hora_saida, data, u_cpf) VALUES (%s, %s, %s, %s)"""
 
+# Lista todos os exercícios
+select_todos_exerciicos = "SELECT E.nome, E.musculo FROM academia.EXERCICIOS AS E;"
+
+# Insere novo exercícios
+insert_novo_exercicio = """INSERT INTO EXERCICIOS (nome, musculo)
+VALUES (%s, %s);"""
+
 # Query para listar os alunos e seus respectivos instrutores
 select_alunos_com_instrutor = """SELECT  U2.nome as nome_aluno, A.cpf_aluno,A.altura ,A.peso ,A.objetivo, I.cpf_instrutor,
 U.nome as nome_instrutor from academia.ALUNOS as A 
@@ -15,6 +22,10 @@ left join academia.INSTRUTORES as I using (cpf_instrutor)
 left join academia.USUARIOS as U on U.cpf =I.cpf_instrutor 
 ORDER BY U.nome;"""
 
+# Retorna lista com todos os instrutores
+select_todos_instrutores = """SELECT U.nome, I.especializacao, U.dt_inicio, U.email 
+    FROM INSTRUTORES AS I, USUARIOS AS U
+    WHERE cpf = cpf_instrutor;"""
 
 # Query para listar os instrutores e quantos alunos cada um tem
 select_instrutores_e_cont_alunos = """SELECT U.nome, I.especializacao, COUNT(A.cpf_aluno) as contagem_de_alunos from academia.INSTRUTORES as I
@@ -59,3 +70,9 @@ FROM USUARIOS AS U, INSTRUTORES AS I
 WHERE U.cpf = cpf_instrutor 
 AND 
 (SELECT COUNT(*) FROM ALUNOS AS A WHERE A.cpf_instrutor = I.cpf_instrutor) >= %s;"""
+
+select_inadimplentes_mes = """SELECT U.nome, U.cpf 
+FROM USUARIOS AS U, ALUNOS AS A 
+WHERE U.cpf = A.cpf_aluno AND NOT EXISTS (SELECT *
+                                      FROM PAGAMENTOS
+                                      WHERE U.cpf = cpf_cliente AND dt_pagamento LIKE  %s);"""

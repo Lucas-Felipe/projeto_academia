@@ -1,7 +1,8 @@
 START TRANSACTION;
 CREATE TABLE IF NOT EXISTS EXERCICIOS(
-    id_exercicio INT PRIMARY KEY,
+    id_exercicio INT AUTO_INCREMENT NOT NULL,
     nome VARCHAR(30) NOT NULL,
-    musculo VARCHAR(30)
+    musculo VARCHAR(30),
+    PRIMARY KEY (id_exercicio)
 );
 COMMIT;

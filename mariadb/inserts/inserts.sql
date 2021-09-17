@@ -90,17 +90,17 @@ VALUES ('2021/02/08', 00001, '25864831550', '10200612548'),
        ('2021/04/06', 00014, '00885423642', '05214874563');
 
 
-INSERT INTO EXERCICIOS (id_exercicio, nome, musculo)
-VALUES (01 ,'Exercício aeróbico', 'Corpo todo'),
-       (02 ,'Flexões', 'Braço'),
-       (03 ,'Abdominais', 'Abdomen'),
-       (04 ,'Agachamento', 'Glúteo'),
-       (05 ,'Stiff', 'Abdutores'),
-       (06 ,'Elevação de ombros', 'Ombro'),
-       (07 ,'Rosca direta', 'Bíceps'),
-       (08 ,'Supino reto', 'Peito'),
-       (09, 'Leg-press', 'Glúteo'),
-       (10,'Agachamendo sumô', 'Glúteo');
+INSERT INTO EXERCICIOS (nome, musculo)
+VALUES ('Exercício aeróbico', 'Corpo todo'),
+       ('Flexões', 'Braço'),
+       ('Abdominais', 'Abdomen'),
+       ('Agachamento', 'Glúteo'),
+       ('Stiff', 'Abdutores'),
+       ('Elevação de ombros', 'Ombro'),
+       ('Rosca direta', 'Bíceps'),
+       ('Supino reto', 'Peito'),
+       ( 'Leg-press', 'Glúteo'),
+       ('Agachamendo sumô', 'Glúteo');
 
 INSERT INTO CONTEM ( id_exercicio,id_ficha )
 VALUES (06, 00001), 
