@@ -146,7 +146,7 @@ def mostrar_todos_usuarios():
 @app.route("/fichas_de_aluno", methods=['GET'])
 def fichas_de_aluno():
     request_data = request.get_json()
-    cpf = request_data['cpf']
+    cpf = (request_data['cpf'],)
     return run_select_query(select_fichas_de_aluno, cpf)
 
 
