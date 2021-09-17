@@ -21,8 +21,9 @@ As rotas podem ser acessadas através da url: `http://localhost:5000`
 
 ### /add_usuario
 
-Método: POST  
-json:
+> adiciona usuário ao banco de dados  
+> Método: POST  
+> body json:
 
 ```json
 {
@@ -37,8 +38,9 @@ json:
 
 ### /add_aluno
 
-Método: POST  
-json:
+> adiciona aluno ao banco de dados  
+> Método: POST  
+> body json:
 
 ```json
 {
@@ -57,8 +59,9 @@ json:
 
 ### /add_instrutor
 
-Método: POST  
-json:
+> adiciona instrutor ao banco de dados  
+> Método: POST  
+> body json:
 
 ```json
 {
@@ -76,8 +79,9 @@ json:
 
 ### /add_frequencia
 
-Método: POST  
-json:
+> adiciona um registro de frequência ao banco de dados  
+> Método: POST  
+> body json:
 
 ```json
 {
@@ -87,3 +91,78 @@ json:
   "u_cpf": "12345678910"
 }
 ```
+
+### /lista_alunos_com_instrutor
+
+> Retorna a lista de todos os alunos com seus respectivos instrutores  
+> Método: GET
+
+### /instrutores_e_cont_alunos
+
+> Retorna a lista de todos os instrutores quando alunos cada um possui  
+> Método: GET
+
+### /instrutores_n_alunos
+
+> Retorna uma lista com instrutores que possuem um valor maior ou igual ao valor de alunos informado  
+> Método: GET
+
+```json
+{
+  "n_alunos": 3
+}
+```
+
+### /todas_frequencias
+
+> Retorna um log de todas as frequencias registradas  
+> Método: GET
+
+### /mostrar_todos_usuarios
+
+> Retorna uma lista de todos os usuários cadastrados  
+> Método: GET
+
+### /fichas_de_aluno
+
+> Retorna todas as fichas de um determinado aluno  
+> Método: GET  
+> body json:
+
+```json
+{
+  "cpf": "12345678901"
+}
+```
+
+### /ficha_dia_semana
+
+> Retorna a ficha de determinado aluno em dia da semana informado  
+> Método: GET  
+> body json:
+
+```json
+{
+  "cpf": "12345678901",
+  "dia": "2021-09-14"
+}
+```
+
+### /fichas_periodo
+
+> Retorna as fichas de determinado aluno em um período especificado  
+> Método: GET  
+> body json:
+
+```json
+{
+  "cpf": "12345678901",
+  "dia_inicio": "2021-08-14",
+  "dia_fim": "2021-09-14"
+}
+```
+
+### /salarios
+
+> Retorna uma tabela informando a soma dos salários, maior salário, menos salário, média salarial e número de instrutores cadastrados.  
+> Método: GET
